@@ -50,7 +50,7 @@ defmodule RiakPool do
 
 
   @doc """
-  Used to create or update values in the database. Accepts a riak object, created with the `:riakc_obj` module as the argument.
+  Used to fetch values from the database. Accepts bucket name and key
   """
   @spec get(String.t, String.t) :: :riakc_obj.riakc_obj
   def get(bucket, key) do
@@ -59,7 +59,9 @@ defmodule RiakPool do
     end
   end
 
-
+  @doc """
+  Used to create or update values in the database. Accepts a riak object, created with the `:riakc_obj` module as the argument.
+  """
   @spec put(:riakc_obj.riakc_obj) :: :riakc_obj.riakc_obj
   def put(object) do
     run fn (worker)->
