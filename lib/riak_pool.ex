@@ -60,6 +60,24 @@ defmodule RiakPool do
   end
 
   @doc """
+  Execute a secondary index equality query with specified options
+  """
+  def get_index_eq(bucket, index, key, opts \\ []) do
+    run fn (worker)->
+      :riak_pb_socket.get_index_eq worker, bucket, index, key, opts
+    end
+  end
+
+  @doc """
+  Execute a secondary index range query with specified options
+  """
+  def get_index_range(bucket, index, start_key, end_key, opts \\ []) do
+    run fn (worker)->
+      :riakc_pb_socket.get_index_range worker, bucket, index, start_key, end_key, opts
+    end
+  end
+
+  @doc """
   Used to create or update values in the database. Accepts a riak object, created with the `:riakc_obj` module as the argument.
   """
   @spec put(:riakc_obj.riakc_obj) :: :riakc_obj.riakc_obj
